@@ -4,6 +4,8 @@ import { handleInitialData } from "./actions/shared";
 import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "./components/Login";
+import Home from "./components/Home";
+import "./index.css";
 
 const App = ({ authUser, handleInitialData }) => {
   useEffect(() => handleInitialData);
@@ -15,7 +17,7 @@ const App = ({ authUser, handleInitialData }) => {
         {authUser === null ? (
           <Route path="/" element={<Login />} />
         ) : (
-          <Route exact path="/" element={<p>HOME</p>} />
+          <Route exact path="/" element={<Home />} />
         )}
       </Routes>
     </div>
