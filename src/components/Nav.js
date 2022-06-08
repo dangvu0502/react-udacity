@@ -1,17 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 import { LoginOutlined } from "@ant-design/icons";
+import { setAuthUser } from "../actions/authUser";
+import { Button, Tabs, Avatar, Space } from "antd";
+import Home from "./Home";
 
-import { Button, Tabs, Avatar, Row, Col, Space } from "antd";
+const Nav = ({ users, authUser, setAuthUser }) => {
+  const { TabPane } = Tabs;
 
-const { TabPane } = Tabs;
+  const handleLogout = () => {
+    setAuthUser(null);
+  };
 
-const Nav = ({ users, authUser }) => {
-  const operations = (
-    <Space className="tabs-extra-content" align="baseline" size="middle">
-      <Avatar src={authUser.avatarURL} size={50} />
+  const avatarAndLogout = (
+    <Space className="tabs-extra-content" align="baseline">
       {"Hello, " + authUser.name}
-      <Button icon={<LoginOutlined />}>Logout</Button>
+      <Avatar src={authUser.avatarURL} size={50} />
+      <Button danger onClick={handleLogout} icon={<LoginOutlined />}>
+        Logout
+      </Button>
     </Space>
   );
 
@@ -19,12 +26,11 @@ const Nav = ({ users, authUser }) => {
     <>
       <Tabs
         defaultActiveKey="Home"
-        tabBarExtraContent={operations}
-        centered={true}
-        tabBarStyle={{ height: 100 }}
+        tabBarExtraContent={avatarAndLogout}
+        tabBarStyle={{ height: 80 }}
       >
         <TabPane tab="Home" key="Home">
-          Content of Home
+          <Home />
         </TabPane>
         <TabPane tab="New Poll" key="NewPoll">
           Content of New Poll
@@ -37,7 +43,10 @@ const Nav = ({ users, authUser }) => {
   );
 };
 
-export default connect(({ users, authUser }) => ({
-  authUser,
-  users,
-}))(Nav);
+export default connect(
+  ({ users, authUser }) => ({
+    authUser,
+    users,
+  }),
+  { setAuthUser }
+)(Nav);

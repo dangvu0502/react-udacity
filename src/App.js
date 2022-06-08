@@ -3,12 +3,13 @@ import React, { useEffect } from "react";
 import { handleInitialData } from "./actions/shared";
 import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { Row, Col } from "antd";
+import Nav from "./components/Nav";
 import Login from "./components/Login";
-import Home from "./components/Home";
 import "./index.css";
 
 const App = ({ authUser, handleInitialData }) => {
-  useEffect(() => handleInitialData);
+  useEffect(() => handleInitialData, []);
   // -------- console.log() --------
   console.log(authUser);
   return (
@@ -17,7 +18,17 @@ const App = ({ authUser, handleInitialData }) => {
         {authUser === null ? (
           <Route path="/" element={<Login />} />
         ) : (
-          <Route exact path="/" element={<Home />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <Row>
+                <Col span={20} offset={2}>
+                  <Nav />
+                </Col>
+              </Row>
+            }
+          />
         )}
       </Routes>
     </div>
@@ -25,8 +36,6 @@ const App = ({ authUser, handleInitialData }) => {
 };
 
 export default connect(
-  (state) => ({
-    authUser: state.authUser,
-  }),
+  ({authUser}) => ({authUser}),
   { handleInitialData }
 )(App);
