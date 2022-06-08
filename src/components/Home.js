@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Card } from "antd";
-import Poll from "./Poll";
+import PollPreview from "./PollPreview";
 
 const Home = ({ questions }) => {
   const [activeTabKey, setActiveTabKey] = useState("unAnswered");
@@ -23,13 +23,13 @@ const Home = ({ questions }) => {
   const contentList = {
     unAnswered: answeredQuestions.map((answeredQuestion) => (
       <div key={answeredQuestion.id}>
-        <Poll key={answeredQuestion.id} question={answeredQuestion} />
+        <PollPreview key={answeredQuestion.id} question={answeredQuestion} />
         <br />
       </div>
     )),
     answered: unAnsweredQuestions.map((unAnsweredQuestion) => (
       <div key={unAnsweredQuestion.id}>
-        <Poll question={unAnsweredQuestion} />
+        <PollPreview question={unAnsweredQuestion} />
         <br />
       </div>
     )),

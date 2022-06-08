@@ -1,45 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { LoginOutlined } from "@ant-design/icons";
 import { setAuthUser } from "../actions/authUser";
-import { Button, Tabs, Avatar, Space } from "antd";
-import Home from "./Home";
+import { Button, Avatar, Space, Row, Col, Menu, Layout, Divider } from "antd";
+import { Link } from "react-router-dom";
 
-const Nav = ({ users, authUser, setAuthUser }) => {
-  const { TabPane } = Tabs;
+const Nav = ({ users, authUser, setAuthUser, tabActiveKey }) => {
+  const { Header } = Layout;
+  const [current, setCurrent] = useState("Home");
 
   const handleLogout = () => {
     setAuthUser(null);
   };
 
-  const avatarAndLogout = (
-    <Space className="tabs-extra-content" align="baseline">
-      {"Hello, " + authUser.name}
-      <Avatar src={authUser.avatarURL} size={50} />
-      <Button danger onClick={handleLogout} icon={<LoginOutlined />}>
-        Logout
-      </Button>
-    </Space>
-  );
+  const items = [
+    {
+      label: <Link to="/">Home</Link>,
+      key: "Home",
+    },
+    {
+      label: <Link to="/NewPoll">New Poll</Link>,
+      key: "NewPoll",
+    },
+    {
+      label: <Link to="/LeaderBoard">Leader Board</Link>,
+      key: "LeaderBoard",
+    },
+    {
+      label: (
+        <Row>
+          <Col span={8} offset={24}></Col>
+        </Row>
+      ),
+    },
+  ];
+  const onClick = (e) => {
+    console.log("click ", e);
+    setCurrent(e.key);
+  };
 
   return (
-    <>
-      <Tabs
-        defaultActiveKey="Home"
-        tabBarExtraContent={avatarAndLogout}
-        tabBarStyle={{ height: 80 }}
-      >
-        <TabPane tab="Home" key="Home">
-          <Home />
-        </TabPane>
-        <TabPane tab="New Poll" key="NewPoll">
-          Content of New Poll
-        </TabPane>
-        <TabPane tab="Leader Board" key="LeaderBoard">
-          Content of Leader Board
-        </TabPane>
-      </Tabs>
-    </>
+    <Row>
+      <Col span={18} offset={3}>
+        <Header
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "white",
+          }}
+        >
+          <Menu
+            onClick={onClick}
+            selectedKeys={[current]}
+            mode="horizontal"
+            items={items}
+            style={{ width: 400, marginTop: 5, border: 0 }}
+          />
+          <Space align="baseline">
+            {"Hello, " + authUser.name}
+            <Avatar src={authUser.avatarURL} size={50} />
+            <Button onClick={handleLogout} icon={<LoginOutlined />}>
+              Logout
+            </Button>
+          </Space>
+        </Header>
+        <Divider style={{ marginTop: 0 }} />
+      </Col>
+    </Row>
   );
 };
 

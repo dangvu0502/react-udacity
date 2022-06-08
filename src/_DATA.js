@@ -3,7 +3,7 @@ let users = {
     id: "sarahedo",
     name: "Sarah Edo",
     avatarURL:
-      "https://www.pngitem.com/pimgs/m/379-3790140_apple-fruit-icon-simple-red-delicious-fresh-.png",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-TWuvvN37brr3nckuj2dVp84-1fxV2Ldtnw&usqp=CAU",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionTwo",
