@@ -21,15 +21,15 @@ const Home = ({ questions }) => {
   ];
 
   const contentList = {
-    unAnswered: answeredQuestions.map((answeredQuestion) => (
-      <div key={answeredQuestion.id}>
-        <PollPreview key={answeredQuestion.id} question={answeredQuestion} />
+    unAnswered: unAnsweredQuestions.map((unAnsweredQuestion) => (
+      <div key={unAnsweredQuestion.id}>
+        <PollPreview answered={false} question={unAnsweredQuestion} />
         <br />
       </div>
     )),
-    answered: unAnsweredQuestions.map((unAnsweredQuestion) => (
-      <div key={unAnsweredQuestion.id}>
-        <PollPreview question={unAnsweredQuestion} />
+    answered: answeredQuestions.map((answeredQuestion) => (
+      <div key={answeredQuestion.id}>
+        <PollPreview answered={true} question={answeredQuestion} />
         <br />
       </div>
     )),
@@ -67,10 +67,10 @@ export default connect(({ authUser, users, questions }) => {
   const answeredIds = Object.keys(users[authUser.id].answers);
   const answered = Object.values(questions)
     .filter((question) => answeredIds.includes(question.id))
-    .sort((a, b) => b.timestamp - a.timestamp);
+    .sort((a, b) => a.timestamp - b.timestamp);
   const unAnswered = Object.values(questions)
     .filter((question) => !answeredIds.includes(question.id))
-    .sort((a, b) => b.timestamp - a.timestamp);
+    .sort((a, b) => a.timestamp - b.timestamp);
   //console.log(answered);
   //console.log(unanswered);
   return {

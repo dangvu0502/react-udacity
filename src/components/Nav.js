@@ -5,7 +5,7 @@ import { setAuthUser } from "../actions/authUser";
 import { Button, Avatar, Space, Row, Col, Menu, Layout, Divider } from "antd";
 import { Link } from "react-router-dom";
 
-const Nav = ({ users, authUser, setAuthUser, tabActiveKey }) => {
+const Nav = ({ authUser, setAuthUser }) => {
   const { Header } = Layout;
   const [current, setCurrent] = useState("Home");
 
@@ -71,9 +71,8 @@ const Nav = ({ users, authUser, setAuthUser, tabActiveKey }) => {
 };
 
 export default connect(
-  ({ users, authUser }) => ({
+  ({ authUser }) => ({
     authUser,
-    users,
   }),
   { setAuthUser }
 )(Nav);

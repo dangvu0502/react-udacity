@@ -9,10 +9,8 @@ const Login = ({ users, setAuthUser }) => {
   const { Meta } = Card;
   const { Option } = Select;
 
-  console.log("userID: " + userID);
 
   const handleChange = (value) => {
-    console.log(`Selected: ${value}`);
     setUserID(value);
   };
 

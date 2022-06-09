@@ -8,11 +8,11 @@ import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import "./index.css";
+import PollResult from "./components/PollResult";
 
 const App = ({ authUser, handleInitialData }) => {
   useEffect(() => handleInitialData, []);
-  // -------- console.log() --------
-  console.log(authUser);
+
   return (
     <div className="App">
       <Router>
@@ -26,6 +26,7 @@ const App = ({ authUser, handleInitialData }) => {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/Poll/:id" element={<PollDetails />} />
+              <Route exact path="/PollResult/:id" element={<PollResult />} />
             </Routes>
           </Fragment>
         )}

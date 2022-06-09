@@ -1,17 +1,27 @@
-import { Button, Card, Divider, Image, Space, Row, Col, Radio } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import Nav from "./Nav";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Card, Divider, Image, Space, Row, Col, Radio } from "antd";
+import { handleAddAnswerToQuestion } from "../actions/questions";
 
-const PollDetails = ({ users, questions }) => {
+const PollDetails = ({ users, questions, handleAddAnswerToQuestion }) => {
   const { Meta } = Card;
   const { id } = useParams();
+  const navigate = useNavigate();
   const question = questions[id];
 
   const author = users[question.author];
 
-  const handleClick = () => {};
+  const [value, setValue] = useState("optionOne");
+
+  const handleRadioGroupChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleClick = () => {
+    console.log(question.id + " " + value);
+    handleAddAnswerToQuestion({ qid: question.id, answer: value });
+    navigate(`/PollResult/${question.id}`);
+  };
 
   return (
     <>
@@ -35,12 +45,12 @@ const PollDetails = ({ users, questions }) => {
                     marginBottom: 8,
                   }}
                 />
-                <Radio value={question.optionOne.text}>
-                  {question.optionOne.text}
-                </Radio>
-                <Radio value={question.optionTwo.text}>
-                  {question.optionTwo.text}
-                </Radio>
+                <Radio.Group onChange={handleRadioGroupChange} value={value}>
+                  <Space direction="vertical">
+                    <Radio value="optionOne">{question.optionOne.text}</Radio>
+                    <Radio value="optionTwo">{question.optionTwo.text}</Radio>
+                  </Space>
+                </Radio.Group>
                 <Button
                   onClick={handleClick}
                   type="primary"
@@ -60,6 +70,10 @@ const PollDetails = ({ users, questions }) => {
   );
 };
 
-export default connect(({ users, questions }) => ({ users, questions }))(
-  PollDetails
-);
+export default connect(
+  ({ users, questions }) => ({
+    users,
+    questions,
+  }),
+  { handleAddAnswerToQuestion }
+)(PollDetails);
