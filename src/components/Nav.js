@@ -1,31 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { LoginOutlined } from "@ant-design/icons";
 import { setAuthUser } from "../actions/authUser";
 import { Button, Avatar, Space, Row, Col, Menu, Layout, Divider } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Nav = ({ authUser, setAuthUser }) => {
   const { Header } = Layout;
-  const [current, setCurrent] = useState("Home");
   const navigate = useNavigate();
 
   const handleLogout = () => {
     setAuthUser(null);
     navigate("/");
   };
+  let activeStyle = {
+    color: "#1890ff",
+    fontSize: 16
+  };
 
   const items = [
     {
-      label: <Link to="/">Home</Link>,
+      label: (
+        <NavLink
+          to="/"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
+          Home
+        </NavLink>
+      ),
       key: "Home",
     },
     {
-      label: <Link to="/NewPoll">New Poll</Link>,
+      label: (
+        <NavLink
+          to="/NewPoll"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
+          New Poll
+        </NavLink>
+      ),
       key: "NewPoll",
     },
     {
-      label: <Link to="/LeaderBoard">Leader Board</Link>,
+      label: (
+        <NavLink
+          to="/LeaderBoard"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
+          Leader Board
+        </NavLink>
+      ),
       key: "LeaderBoard",
     },
     {
@@ -36,10 +60,7 @@ const Nav = ({ authUser, setAuthUser }) => {
       ),
     },
   ];
-  const onClick = (e) => {
-    console.log("click ", e);
-    setCurrent(e.key);
-  };
+
 
   return (
     <Row>
@@ -52,8 +73,7 @@ const Nav = ({ authUser, setAuthUser }) => {
           }}
         >
           <Menu
-            onClick={onClick}
-            selectedKeys={[current]}
+            selectedKeys={[]}
             mode="horizontal"
             items={items}
             style={{ width: 400, marginTop: 5, border: 0 }}
