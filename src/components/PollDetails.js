@@ -18,7 +18,6 @@ const PollDetails = ({ users, questions, handleAddAnswerToQuestion }) => {
     setValue(e.target.value);
   };
   const handleClick = () => {
-    console.log(question.id + " " + value);
     handleAddAnswerToQuestion({ qid: question.id, answer: value });
     navigate(`/PollResult/${question.id}`);
   };

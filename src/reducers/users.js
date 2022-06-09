@@ -10,6 +10,16 @@ const users = (state = {}, action) => {
       };
     case ADD_ANSWER_TO_QUESTION:
       const { qid, answer, authUser } = action.payload;
+      console.log({
+        ...state,
+        [authUser.id]: {
+          ...state[authUser.id],
+          answers: {
+            ...state[authUser.id].answers,
+            [qid]: answer,
+          },
+        },
+      });
 
       return {
         ...state,

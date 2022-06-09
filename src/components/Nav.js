@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 import { LoginOutlined } from "@ant-design/icons";
 import { setAuthUser } from "../actions/authUser";
 import { Button, Avatar, Space, Row, Col, Menu, Layout, Divider } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Nav = ({ authUser, setAuthUser }) => {
   const { Header } = Layout;
   const [current, setCurrent] = useState("Home");
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setAuthUser(null);
+    navigate("/");
   };
 
   const items = [

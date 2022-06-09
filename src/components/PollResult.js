@@ -22,8 +22,7 @@ const PollResult = ({ users, questions, authUser }) => {
   const author = users[question.author];
   const votes =
     question.optionOne.votes.length + question.optionTwo.votes.length;
-  const votedOption = authUser.answers[question.id];
-  console.log(authUser);
+  const votedOption = users[authUser.id].answers[question.id];
   const optionOne = (
     <Card
       style={{
