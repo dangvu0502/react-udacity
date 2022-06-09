@@ -14,14 +14,48 @@ import {
   Button,
 } from "antd";
 
-const PollResult = ({ users, questions }) => {
+const PollResult = ({ users, questions, authUser }) => {
   const { Meta } = Card;
   const { id } = useParams();
   const navigate = useNavigate();
   const question = questions[id];
-
   const author = users[question.author];
+  const votes =
+    question.optionOne.votes.length + question.optionTwo.votes.length;
+  const votedOption = authUser.answers[question.id];
+  console.log(authUser);
+  const optionOne = (
+    <Card
+      style={{
+        color: "black",
+        width: 300,
+      }}
+    >
+      {question.optionOne.text}
+      <Progress
+        percent={Math.round((question.optionOne.votes.length / votes) * 100)}
+      />
+      <Statistic
+        value={`${question.optionOne.votes.length} of ${votes} votes`}
+      />
+    </Card>
+  );
 
+  const optionTwo = (
+    <Card
+      style={{
+        width: 300,
+      }}
+    >
+      {question.optionTwo.text}
+      <Progress
+        percent={Math.round((question.optionTwo.votes.length / votes) * 100)}
+      />
+      <Statistic
+        value={`${question.optionTwo.votes.length} of ${votes} votes`}
+      />
+    </Card>
+  );
   return (
     <>
       <Row>
@@ -45,30 +79,22 @@ const PollResult = ({ users, questions }) => {
                     marginBottom: 8,
                   }}
                 />
-                <Badge>
-                  <Card
-                    style={{
-                      color: "black",
-                      width: 300,
-                    }}
-                  >
-                    {question.optionOne.text}
-                    <Progress percent={0} />
-                    <Statistic value={"0 of 3 votes"} />
-                  </Card>
-                </Badge>
-                <Badge.Ribbon text="Your Vote" color="green">
-                  <Card
-                    style={{
-                      width: 300,
-                    }}
-                  >
-                    {question.optionTwo.text}
-                    <Progress percent={100} />
-                    <Statistic value={"3 of 3 votes"} />
-                  </Card>
-                </Badge.Ribbon>
-                <Button onClick={() => navigate(-1)} block>
+                {votedOption === "optionTwo" ? (
+                  <>
+                    <Badge>{optionOne}</Badge>
+                    <Badge.Ribbon text="Your Vote" color="green">
+                      {optionTwo}
+                    </Badge.Ribbon>
+                  </>
+                ) : (
+                  <>
+                    <Badge.Ribbon text="Your Vote" color="green">
+                      {optionOne}
+                    </Badge.Ribbon>
+                    <Badge>{optionTwo}</Badge>
+                  </>
+                )}
+                <Button onClick={() => navigate("/")} block>
                   Back
                 </Button>
               </Space>
@@ -80,7 +106,8 @@ const PollResult = ({ users, questions }) => {
   );
 };
 
-export default connect(({ users, questions }) => ({
+export default connect(({ users, questions, authUser }) => ({
+  authUser,
   users,
   questions,
 }))(PollResult);
