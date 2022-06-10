@@ -1,5 +1,6 @@
 import { RECEIVE_USERS } from "../actions/users";
 import { ADD_VOTE_TO_QUESTION } from "../actions/questions";
+import { ADD_QUESTION_TO_USER } from "../actions/users";
 
 const users = (state = {}, action) => {
   switch (action.type) {
@@ -18,6 +19,16 @@ const users = (state = {}, action) => {
             ...state[authUser.id].answers,
             [qid]: answer,
           },
+        },
+      };
+    case ADD_QUESTION_TO_USER:
+      const { id, author } = action;
+
+      return {
+        ...state,
+        [author]: {
+          ...state[author],
+          questions: state[author].questions.concat(id),
         },
       };
     default:

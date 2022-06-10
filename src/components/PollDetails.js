@@ -19,7 +19,7 @@ const PollDetails = ({ users, questions, handleAddAnswerToQuestion }) => {
   };
   const handleClick = () => {
     handleAddAnswerToQuestion({ qid: question.id, answer: value });
-    navigate(`/pollresult/${question.id}`);
+    navigate(`/results/${question.id}`);
   };
 
   return (

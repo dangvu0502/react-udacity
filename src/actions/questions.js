@@ -1,5 +1,6 @@
 import { _saveQuestionAnswer } from "../_DATA";
 import { _saveQuestion } from "../_DATA";
+import { addQuestionToUser } from "../actions/users";
 
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -50,6 +51,9 @@ export function handleAddQuestion({ optionOne, optionTwo }) {
       optionOneText: optionOne,
       optionTwoText: optionTwo,
       author: authUser.id,
-    }).then((question) => dispatch(addQuestion(question)));
+    }).then((question) => {
+      dispatch(addQuestion(question));
+      dispatch(addQuestionToUser(question));
+    });
   };
 }

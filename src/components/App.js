@@ -1,17 +1,15 @@
-import "./index.css";
 import "antd/dist/antd.css";
-
 import React, { useEffect, Fragment } from "react";
-import { handleInitialData } from "./actions/shared";
+import { handleInitialData } from "../actions/shared";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import PollDetails from "./components/PollDetails";
-import Nav from "./components/Nav";
-import Login from "./components/Login";
-import Home from "./components/Home";
-import NewPoll from "./components/NewPoll";
-import LeaderBoard from "./components/LeaderBoard";
-import PollResult from "./components/PollResult";
+import PollDetails from "./PollDetails";
+import Nav from "./Nav";
+import Login from "./Login";
+import Home from "./Home";
+import NewPoll from "./NewPoll";
+import LeaderBoard from "./LeaderBoard";
+import PollResult from "./PollResult";
 
 const App = ({ authUser, handleInitialData }) => {
   useEffect(() => {
@@ -23,7 +21,7 @@ const App = ({ authUser, handleInitialData }) => {
       <Router>
         {authUser === null ? (
           <Routes>
-            <Route path="*" element={<Login />} />
+            <Route path="/" element={<Login />} />
           </Routes>
         ) : (
           <Fragment>
