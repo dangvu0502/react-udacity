@@ -11,18 +11,20 @@ import {
   Form,
   message,
 } from "antd";
+import { useNavigate } from "react-router-dom";
 import { handleAddQuestion } from "../actions/questions";
 
 const NewPoll = ({ handleAddQuestion }) => {
   const { Meta } = Card;
   const key = "updatable";
+  const navigate = useNavigate();
   const onFinish = (value) => {
     const { optionOne, optionTwo } = value;
     handleAddQuestion({ optionOne, optionTwo });
     message.loading({
       content: "Loading...",
       key,
-      duration: 4,
+      duration: 6,
     });
     setTimeout(() => {
       message.success({
@@ -30,6 +32,7 @@ const NewPoll = ({ handleAddQuestion }) => {
         key,
         duration: 2,
       });
+      navigate("/");
     }, 1000);
   };
 

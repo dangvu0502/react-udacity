@@ -30,8 +30,8 @@ const App = ({ authUser, handleInitialData }) => {
             <Nav />
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route exact path="/poll/:id" element={<PollDetails />} />
-              <Route exact path="/pollresult/:id" element={<PollResult />} />
+              <Route exact path="/questions/:id" element={<PollDetails />} />
+              <Route exact path="/results/:id" element={<PollResult />} />
               <Route exact path="/add" element={<NewPoll />} />
               <Route exact path="/leaderboard" element={<LeaderBoard />} />
             </Routes>

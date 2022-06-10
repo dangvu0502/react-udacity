@@ -10,8 +10,8 @@ const Poll = ({ question, users, answered }) => {
 
   const handleClick = () => {
     const target = !answered
-      ? `/poll/${question.id}`
-      : `/pollresult/${question.id}`;
+      ? `/questions/${question.id}`
+      : `/results/${question.id}`;
     navigate(target);
   };
 
