@@ -67,10 +67,10 @@ export default connect(({ authUser, users, questions }) => {
   const answeredIds = Object.keys(users[authUser.id].answers);
   const answered = Object.values(questions)
     .filter((question) => answeredIds.includes(question.id))
-    .sort((a, b) => a.timestamp - b.timestamp);
+    .sort((a, b) => b.timestamp - a.timestamp);
   const unAnswered = Object.values(questions)
     .filter((question) => !answeredIds.includes(question.id))
-    .sort((a, b) => a.timestamp - b.timestamp);
+    .sort((a, b) => b.timestamp - a.timestamp);
   //console.log(answered);
   //console.log(unanswered);
   return {

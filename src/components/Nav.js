@@ -33,7 +33,7 @@ const Nav = ({ authUser, setAuthUser }) => {
     {
       label: (
         <NavLink
-          to="/NewPoll"
+          to="/add"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
         >
           New Poll
@@ -44,7 +44,7 @@ const Nav = ({ authUser, setAuthUser }) => {
     {
       label: (
         <NavLink
-          to="/LeaderBoard"
+          to="/leaderboard"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
         >
           Leader Board

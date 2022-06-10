@@ -1,4 +1,6 @@
+import "./index.css";
 import "antd/dist/antd.css";
+
 import React, { useEffect, Fragment } from "react";
 import { handleInitialData } from "./actions/shared";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -7,11 +9,14 @@ import PollDetails from "./components/PollDetails";
 import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import "./index.css";
+import NewPoll from "./components/NewPoll";
+import LeaderBoard from "./components/LeaderBoard";
 import PollResult from "./components/PollResult";
 
 const App = ({ authUser, handleInitialData }) => {
-  useEffect(() => handleInitialData, []);
+  useEffect(() => {
+    handleInitialData();
+  }, []);
 
   return (
     <div className="App">
@@ -25,8 +30,10 @@ const App = ({ authUser, handleInitialData }) => {
             <Nav />
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route exact path="/Poll/:id" element={<PollDetails />} />
-              <Route exact path="/PollResult/:id" element={<PollResult />} />
+              <Route exact path="/poll/:id" element={<PollDetails />} />
+              <Route exact path="/pollresult/:id" element={<PollResult />} />
+              <Route exact path="/add" element={<NewPoll />} />
+              <Route exact path="/leaderboard" element={<LeaderBoard />} />
             </Routes>
           </Fragment>
         )}

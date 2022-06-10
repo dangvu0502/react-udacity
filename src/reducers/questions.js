@@ -1,6 +1,7 @@
 import {
   RECEIVE_QUESTIONS,
-  ADD_ANSWER_TO_QUESTION,
+  ADD_VOTE_TO_QUESTION,
+  ADD_QUESTION,
 } from "../actions/questions";
 
 const questions = (state = {}, action) => {
@@ -10,18 +11,8 @@ const questions = (state = {}, action) => {
         ...state,
         ...action.questions,
       };
-    case ADD_ANSWER_TO_QUESTION:
+    case ADD_VOTE_TO_QUESTION:
       const { qid, answer, authUser } = action.payload;
-      console.log({
-        ...state,
-        [qid]: {
-          ...state[qid],
-          [answer]: {
-            ...state[qid][answer],
-            votes: state[qid][answer].votes.concat([authUser]),
-          },
-        },
-      });
       return {
         ...state,
         [qid]: {
@@ -31,6 +22,11 @@ const questions = (state = {}, action) => {
             votes: state[qid][answer].votes.concat([authUser]),
           },
         },
+      };
+    case ADD_QUESTION:
+      return {
+        ...state,
+        [action.question.id]: action.question,
       };
     default:
       return state;
