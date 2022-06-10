@@ -10,6 +10,7 @@ import Home from "./Home";
 import NewPoll from "./NewPoll";
 import LeaderBoard from "./LeaderBoard";
 import PollResult from "./PollResult";
+import NotFound from "./NotFound";
 
 const App = ({ authUser, handleInitialData }) => {
   useEffect(() => {
@@ -21,7 +22,8 @@ const App = ({ authUser, handleInitialData }) => {
       <Router>
         {authUser === null ? (
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route exact path="/" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         ) : (
           <Fragment>
