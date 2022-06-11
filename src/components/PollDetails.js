@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card, Divider, Image, Space, Row, Col, Radio } from "antd";
@@ -13,10 +13,6 @@ const PollDetails = ({ users, questions, handleAddAnswerToQuestion }) => {
   const author = users[question?.author];
 
   const [value, setValue] = useState("optionOne");
-
-  useEffect(() => {
-    if (!question) navigate("notfound");
-  });
 
   const handleRadioGroupChange = (e) => {
     setValue(e.target.value);
