@@ -1,4 +1,4 @@
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import React, { useEffect, Fragment } from "react";
 import { handleInitialData } from "../actions/shared";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,25 +15,23 @@ import NotFound from "./NotFound";
 const App = ({ authUser, handleInitialData }) => {
   useEffect(() => {
     handleInitialData();
-  }, []);
+  });
 
   return (
     <div className="App">
       <Router>
         {authUser === null ? (
-          <Routes>
-            <Route exact path="/" element={<Login />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Login />
         ) : (
           <Fragment>
             <Nav />
             <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/questions/:id" element={<PollDetails />} />
-              <Route exact path="/results/:id" element={<PollResult />} />
-              <Route exact path="/add" element={<NewPoll />} />
-              <Route exact path="/leaderboard" element={<LeaderBoard />} />
+              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/questions/:id" element={<PollDetails />} />
+              <Route path="/results/:id" element={<PollResult />} />
+              <Route path="/add" element={<NewPoll />} />
+              <Route path="/leaderboard" element={<LeaderBoard />} />
             </Routes>
           </Fragment>
         )}

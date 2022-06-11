@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card, Divider, Image, Space, Row, Col, Radio } from "antd";
@@ -10,9 +10,13 @@ const PollDetails = ({ users, questions, handleAddAnswerToQuestion }) => {
   const navigate = useNavigate();
   const question = questions[id];
 
-  const author = users[question.author];
+  const author = users[question?.author];
 
   const [value, setValue] = useState("optionOne");
+
+  useEffect(() => {
+    if (!question) navigate("notfound");
+  });
 
   const handleRadioGroupChange = (e) => {
     setValue(e.target.value);
@@ -28,11 +32,11 @@ const PollDetails = ({ users, questions, handleAddAnswerToQuestion }) => {
         <Col span={8} offset={8}>
           <Card
             type="inner"
-            title={author.name + " asks: "}
+            title={author?.name + " asks: "}
             bodyStyle={{ display: "flex", justifyContent: "start" }}
           >
             <Space size="middle">
-              <Image src={author.avatarURL} preview={false} width={100} />
+              <Image src={author?.avatarURL} preview={false} width={100} />
               <Divider type="vertical" style={{ height: 100 }} />
               <Space
                 direction="vertical"
@@ -46,8 +50,8 @@ const PollDetails = ({ users, questions, handleAddAnswerToQuestion }) => {
                 />
                 <Radio.Group onChange={handleRadioGroupChange} value={value}>
                   <Space direction="vertical">
-                    <Radio value="optionOne">{question.optionOne.text}</Radio>
-                    <Radio value="optionTwo">{question.optionTwo.text}</Radio>
+                    <Radio value="optionOne">{question?.optionOne.text}</Radio>
+                    <Radio value="optionTwo">{question?.optionTwo.text}</Radio>
                   </Space>
                 </Radio.Group>
                 <Button
