@@ -3,13 +3,12 @@ import React, { useEffect, Fragment } from "react";
 import { handleInitialData } from "../actions/shared";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import PollDetails from "./PollDetails";
+import Poll from "./Poll";
 import Nav from "./Nav";
 import Login from "./Login";
 import Home from "./Home";
 import NewPoll from "./NewPoll";
 import LeaderBoard from "./LeaderBoard";
-import PollResult from "./PollResult";
 import NotFound from "./NotFound";
 
 const App = ({ authUser, handleInitialData }) => {
@@ -28,8 +27,7 @@ const App = ({ authUser, handleInitialData }) => {
             <Routes>
               <Route path="*" element={<NotFound />} />
               <Route path="/" element={<Home />} />
-              <Route path="/questions/:id" element={<PollDetails />} />
-              <Route path="/results/:id" element={<PollResult />} />
+              <Route path="/questions/:id" element={<Poll />} />
               <Route path="/add" element={<NewPoll />} />
               <Route path="/leaderboard" element={<LeaderBoard />} />
             </Routes>

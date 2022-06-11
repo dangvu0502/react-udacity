@@ -3,16 +3,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Poll = ({ question, users, answered }) => {
+const PollPreview = ({ question, users, answered }) => {
   const { Meta } = Card;
   const navigate = useNavigate();
+
   const author = users[question.author];
 
   const handleClick = () => {
-    const target = !answered
-      ? `/questions/${question.id}`
-      : `/results/${question.id}`;
-    navigate(target);
+    navigate(`/questions/${question.id}`);
   };
 
   const description = (
@@ -49,4 +47,4 @@ const Poll = ({ question, users, answered }) => {
   );
 };
 
-export default connect(({ users }) => ({ users }))(Poll);
+export default connect(({ users }) => ({ users }))(PollPreview);
