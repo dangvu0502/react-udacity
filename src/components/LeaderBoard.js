@@ -12,7 +12,6 @@ const LeaderBoard = ({ users }) => {
       Object.entries(user1.answers).length -
       user1.questions.length
   );
-  console.log(leaderboard[2]);
 
   return (
     <>
