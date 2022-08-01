@@ -7,7 +7,7 @@ Once the user logs in, the user is able to toggle between his/her answered and u
 
 Upon voting in a poll, all of the information of an answered poll is displayed. The user’s response is recorded and clearly visible on the poll details page. Users can only vote once per poll; they are not allowed to change their answer after they’ve voted. When the user comes back to the home page, the polling question appears in the “Answered” column.
 
-This app is the second of three projects required for [Udacity's React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
+This app is the second of two projects required for [Udacity's React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
 
 - **Live Demo:** [https://danggg-would-you-rather.netlify.app/](https://danggg-would-you-rather.netlify.app/)
 
